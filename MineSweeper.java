@@ -119,7 +119,6 @@ public class MineSweeper extends JFrame implements MouseListener, ActionListener
 					grid[row][col].setDisabledIcon(mineIcon);
 					JOptionPane.showMessageDialog(null, "You are a loser!");
 					displayMines();
-					disabledButton();
 				}
 				else{
 						expand(row, col);
@@ -128,7 +127,6 @@ public class MineSweeper extends JFrame implements MouseListener, ActionListener
 					timer.cancel();
 					gameOn = false;
 					JOptionPane.showMessageDialog(null, "You Won");
-					disabledButton();
 				}
 			}
 			if(e.getButton() == MouseEvent.BUTTON3){
@@ -160,22 +158,12 @@ public class MineSweeper extends JFrame implements MouseListener, ActionListener
 		}
 	}
 
-	public void disabledButton(){
-		for(int r = 0; r < grid.length; r++){
-			for(int c = 0; c < grid[0].length; c++){
-				if(grid[r][c].getIcon()!= flagIcon){
-					grid[r][c].setSelected(true);
-					grid[r][c].setEnabled(false);
-				}
-			}
-		}
-	}
-
 	public void displayMines(){
 		for(int r = 0; r < grid.length; r++){
 			for(int c = 0; c < grid[0].length; c++){
 				int state = (int)(grid[r][c].getClientProperty("state"));
 				if(state == 10 && grid[r][c].getIcon() != flagIcon){
+					grid[r][c].setSelected(true);
 					grid[r][c].setIcon(mineIcon);
 					grid[r][c].setDisabledIcon(mineIcon);
 
